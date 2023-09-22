@@ -1,0 +1,67 @@
+<div *ngIf="isMenuPresent()" class="container mt-5 mb-5">
+<table mat-table [dataSource]="menuDetails">
+
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Menu Name">
+      <th mat-header-cell *matHeaderCellDef> Menu Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.menuName}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.menuDescription}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="editMenuDescription(element.menuId)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+    <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="deleteMenu(element.menuId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!--View FoodItems-->>
+    <ng-container matColumnDef="View FoodItems">
+      <th mat-header-cell *matHeaderCellDef> View FoodItems </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="accent" (click)="viewFoodItems(element.menuId)">View</button>
+      </td>
+    </ng-container>
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <button *ngIf="!isUser()" (click)="addMenu(restaurantId)" mat-flat-button color="accent" class="mt-2" >Add Menu</button>
+</div>
+
+<div *ngIf="!isUser()&&!isMenuPresent()" (click)="addMenu()" class="clickzone mt-10">
+  <div class="text-wrapper">
+      <div class="centered">
+        <h1>No Menu to display</h1><br>
+          Click here to add menus to your Restaurant.
+      </div>
+
+  </div>
+</div>
+<div *ngIf="isUser()&&!isMenuPresent()"class="clickzone mt-10">
+  <div class="text-wrapper">
+      <div class="centered">
+        <h1>No Menu to display</h1><br>
+      </div>
+
+  </div>
+</div>
+  

@@ -1,0 +1,30 @@
+.space-buttons {
+    flex: 1 1 auto;
+    background-color: #393E46;
+}
+.top-one{
+    background-color: #222831;
+}
+.loggedInToolBar{
+    background-color: #00ADB5;
+}
+
+.mat-flat-button{
+    background-color: #00ADB5;
+}
+
+.zoomato{
+    font-size: 36px;
+}
+.button-container {
+    display: flex;
+    gap: 100px; /* Adjust the value as needed to control the spacing */
+  }
+  
+  .right-align-buttons {
+    margin-left: auto; /* This pushes the buttons to the right */
+    display: flex; /* Use Flexbox for alignment */
+    align-items: center; /* Center vertically within the div */
+  }
+  
+

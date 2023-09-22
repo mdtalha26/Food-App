@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <div class="card p-2">
+                <form #menuForm="ngForm" (ngSubmit)="updateMenuInRestaurant(restaurantId,menuForm)">
+                    <div class="headding mt-5 mb-5">Update Menu</div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Menu Name</mat-label>
+                        <input matInput placeholder="Menu Name" 
+                            [(ngModel)]="menu.menuName" 
+                            name="menuName" required>
+                            <mat-error *ngIf="menuForm?.controls['menuName']?.hasError('required')">Menu Name is Required.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Menu Description</mat-label>
+                        <input matInput placeholder="Menu Description" 
+                            [(ngModel)]="menu.menuDescription"
+                            name="menuDescription" required>
+                            <mat-error *ngIf="menuForm?.controls['menuDescription']?.hasError('required')">Menu Description is Required.</mat-error>
+                    </mat-form-field>
+
+                    <div align="end">
+                        <button type="submit" mat-stroked-button  (click)=printId() [disabled]="menuForm?.invalid">Update Menu</button>
+                    </div>
+                </form>
+
+    </div>
+
+</div>

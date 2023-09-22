@@ -1,0 +1,77 @@
+<div *ngIf="!(!isUser()&&!restaurantPresent())" class="container mt-5">
+  <table mat-table [dataSource]="restaurantDetails">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Restaurant Name">
+      <th mat-header-cell *matHeaderCellDef> Restaurant Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.restaurantName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Restaurant Owner">
+      <th mat-header-cell *matHeaderCellDef> Restaurant Owner </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.userName}} </td>
+    </ng-container>
+
+    <!-- Address column -->
+    <ng-container matColumnDef="Restaurant Address">
+      <th mat-header-cell *matHeaderCellDef> Restaurant Address </th>
+      <td mat-cell *matCellDef="let element"> {{element.restaurantAddress}} </td>
+    </ng-container>
+
+    <!-- Image Column -->
+    <ng-container matColumnDef="Images">
+      <th mat-header-cell *matHeaderCellDef> Images </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="viewRestaurantDocuments(element)">
+          <mat-icon>images </mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Edit Icon-->
+    <ng-container matColumnDef="Edit">
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="editRestaurant(element.restaurantId)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Delete icon -->
+    <ng-container matColumnDef="Delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="deleteRestaurant(element.restaurantId)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!--View Restaurant-->>
+    <ng-container matColumnDef="View Restaurant">
+      <th mat-header-cell *matHeaderCellDef> View Menus </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="accent" (click)="viewRestaurant(element.restaurantId)">View</button>
+      </td>
+    </ng-container>
+
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <button *ngIf="!isUser()&&!restaurantPresent()" (click)="addRestaurant(restaurantId)" mat-flat-button color="accent" class="mt-2" >Add Restaurant</button>
+</div>
+
+<div *ngIf="!isUser()&&!restaurantPresent()" (click)="addRestaurant()" class="clickzone mt-10">
+  <div class="text-wrapper">
+      <div class="centered">
+        <h1>No Restaurant to display</h1><br>
+          Click here to add your Restaurant.
+      </div>
+
+  </div>
+</div>
+  

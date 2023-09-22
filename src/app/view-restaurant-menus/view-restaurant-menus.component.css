@@ -1,0 +1,31 @@
+table{
+    width: 100%;
+}
+.mat-flat-button{
+    background-color: #00ADB5;
+}
+.clickzone{
+    height: 150px;
+    min-width: 100px;
+    display: table;
+    background-color: #eee;
+    width: 300px;
+    border: dashed 3px #aaa;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.text-wrapper{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+.centered{
+    text-align: center;
+    color: #aaa;
+}
+.mt-10{
+    margin-top: 150px;
+}

@@ -1,0 +1,40 @@
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-6">
+
+            <div class="card image-container p-3">
+                <img [src]="foodItem.foodItemImages[selectedFoodItemIndex].url" class="foodItem-zoom-image">
+            </div>
+
+           
+           
+        </div>
+        <div class="col-6">
+            <div class="foodItem-information">
+                <div class="mt-3">
+                    <h1><b>{{foodItem.foodItemName}}</b></h1>
+                </div>
+                <div class="mt-3">
+                    <b>Description: </b><br>
+                    {{foodItem.foodItemDescription}}
+                </div>
+                <div class="mt-3">
+                    <b>Price : {{foodItem.foodItemPrice}} &#8377;</b>
+                </div>
+                <div class="mt-5 text-center">
+                    <button mat-raised-button color="accent" style="width: 200px;" (click)="buyFoodItem(foodItem.foodItemId)"> Buy Now</button>
+                    &nbsp;
+                    <button mat-raised-button style="width: 200px;" (click)="addToCart(foodItem.foodItemId)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="mt-5 smallImg">
+                <mat-grid-list cols="3" gutterSize="10" rowHeight="1:1">
+                    <mat-grid-tile *ngFor="let file of foodItem.foodItemImages; let i = index;" (click)="changeIndex(i)" style="border: 1px solid lightgrey; cursor: pointer;">
+                        <img [src]="file.url" height="100px" >
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </div>
+    </div>
+</div>

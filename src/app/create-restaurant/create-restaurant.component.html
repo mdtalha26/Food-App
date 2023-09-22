@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    <div class="card p-2">
+
+        <div class="row">
+            <div class="headding mt-5 mb-5">Add New Restaurant</div>
+            <div class="col-6">
+
+                <form #restaurantForm="ngForm" (ngSubmit)="createRestaurant(restaurantForm)">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Restaurant Name</mat-label>
+                        <input matInput placeholder="Restaurant Name" [(ngModel)]="restaurant.restaurantName"
+                            name="restaurantName" required>
+                        <mat-error *ngIf="restaurantForm?.controls['restaurantName']?.hasError('required')">Restaurant Name is Required.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>FSSAI License Number</mat-label>
+                        <input matInput placeholder="FSSAI License Number" [(ngModel)]="restaurant.fssaiLicenseNumber"
+                            name="fssaiLicenseNumber" required pattern="^[0-9]{14}$">
+                        <mat-error *ngIf="restaurantForm?.controls['fssaiLicenseNumber']?.hasError('required')">FSSAI License is Required.</mat-error>
+                        <mat-error *ngIf="restaurantForm?.controls['fssaiLicenseNumber']?.hasError('pattern')">FSSAI License must consist of exactly 14 digits.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Pan Card</mat-label>
+                        <input matInput placeholder="Pan Card" [(ngModel)]="restaurant.panCard"
+                            name="panCard" required pattern="^[A-Za-z0-9]{10}$" oninput="this.value = this.value.toUpperCase()">
+                        <mat-error *ngIf="restaurantForm?.controls['panCard']?.hasError('required')">Pan Card is Required.</mat-error>
+                        <mat-error *ngIf="restaurantForm?.controls['panCard']?.hasError('pattern')">Pan Card must be a 10-digit alphanumeric number.</mat-error>
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Restaurant Address</mat-label>
+                        <input matInput placeholder="Restaurant Address" [(ngModel)]="restaurant.restaurantAddress"
+                            name="restaurantAddress" required>
+                            <mat-error *ngIf="restaurantForm?.controls['restaurantAddress']?.hasError('required')">Restaurant Address is Required.</mat-error>
+                    </mat-form-field>
+                    <div align="end">
+                        <button mat-flat-button color="accent" style="margin-right: 5px">Clear</button>
+                        <button type="submit" *ngIf="isNewRestaurant" mat-stroked-button [disabled]="restaurantForm?.invalid">Add Restaurant</button>
+                        <button type="submit" *ngIf="!isNewRestaurant" mat-stroked-button [disabled]="restaurantForm?.invalid">Update Restaurant</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-6">
+                <div>
+                    <div class="dropzone"
+                    appDrag
+                    (files)="fileDropped($event)"
+                    >
+                        <div class="text-wrapper">
+                            <div class="centered">
+                                Drag and drop Restaurant Document Images or
+                                <a (click)="selectFile.click()" class="browse_button">Browse</a>
+                                a file
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+
+                    <input multiple type="file" style="display: none;" #selectFile value="select" (change)="onFileSelected($event)">
+                </div>
+                <div class="mt-5">
+                    <div class="row">
+                        <mat-grid-list cols="4" rowHeight="1:1">
+                            <mat-grid-tile *ngFor="let file of restaurant.documents; let i=index;">
+                                <div style="position: relative">
+                                    <span class="btn-remove-image"(click)="removeImage(i)">x</span>
+                                    <img [src]="file.url" width="100px" height="100px">
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

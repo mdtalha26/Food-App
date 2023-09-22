@@ -1,0 +1,31 @@
+<mat-toolbar class="top-one" color="accent">
+  <span class="zoomato">
+    Zoomato
+  </span>
+
+  <span class="space-buttons"></span>
+  <button *ngIf="! isLoggedIn()" routerLink="/login" mat-flat-button color="accent">
+    Login
+  </button>
+  <button *ngIf="isLoggedIn()" (click)="logout()" mat-flat-button color="accent">
+    Logout
+  </button>
+</mat-toolbar>
+
+<div class="button-container">
+  <mat-toolbar class="loggedInToolBar" color="primary" *ngIf="isLoggedIn()">
+    <button mat-raised-button color="accent" routerLink="/">Home</button>
+    <button *ngIf="isAdmin()||isUser()" mat-flat-button color="accent" routerLink="/viewAllRestaurants">View All
+      Restaurants</button>
+    <button *ngIf="isRestaurant()" mat-flat-button color="accent" routerLink="/viewMyRestaurants">View My
+      Restaurant</button>
+    <div class="right-align-buttons">
+      <button *ngIf="isUser()" mat-flat-button color="accent" routerLink="/cart"><mat-icon>shopping_cart</mat-icon></button>
+      <button *ngIf="isUser()" mat-flat-button color="accent" routerLink="/myOrders">My Orders</button>
+      <!-- <button *ngIf="isAdmin()" mat-flat-button color="accent" routerLink="/addNewProduct">Add New Product</button>
+           <button *ngIf="isAdmin()" mat-flat-button color="accent" routerLink="/showProductDetails">Show Product Details</button> -->
+      <button *ngIf="isAdmin()||isRestaurant()" mat-flat-button color="accent" routerLink="/orderInformation">Orders</button>
+    </div>
+  </mat-toolbar>
+</div>
+

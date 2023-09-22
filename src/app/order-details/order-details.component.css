@@ -1,0 +1,26 @@
+table {
+    width: 100%;
+  }
+  .clickzone{
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.text-wrapper{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+.centered{
+    text-align: center;
+    color: #aaa;
+}
+.mt-10{
+    margin-top: 150px;
+}
+.mat-form-field {
+    /* background-color: white; */
+    border-radius: 5px;
+  }
