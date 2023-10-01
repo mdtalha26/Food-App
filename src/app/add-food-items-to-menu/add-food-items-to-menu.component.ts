@@ -25,6 +25,7 @@ export class AddFoodItemsToMenuComponent implements OnInit {
     foodItemId:null,
     foodItemName:"",
     foodItemDescription:"",
+    foodItemCategory:"",
     foodItemPrice:null,
     foodItemImages:[]
   }
@@ -51,11 +52,13 @@ export class AddFoodItemsToMenuComponent implements OnInit {
   addFoodItemsToMenu(menuId,foodItemForm: NgForm){
 
     const foodItemFormData = this.prepareFormData(this.foodItem);
+    console.log(this.foodItem.foodItemCategory);
 
 
     this.foodItemService.addFoodItemsToMenu(menuId,foodItemFormData).subscribe(
       (reponse:FoodItem)=>{
         foodItemForm.reset();
+        
         this.foodItem.foodItemImages=[];
         this.openErrorDialog('Success', 'Added FoodItem Successfully');
         this.router.navigate(['/showFoodItems/',{menuId}]);

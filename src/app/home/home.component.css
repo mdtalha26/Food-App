@@ -27,3 +27,21 @@ mat-grid-tile {
 .tile{
     background-color: white;
 }
+
+.toggle-button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+.toggle-button {
+    width: 100px; /* Adjust the width as needed */
+  }
+
+.toggle-button.mat-button-toggle-checked {
+    background-color: white; /* Set the background to transparent */
+    color: #000; /* Set the text color to your preferred color */
+  }
+
+.toggle-button.mat-button-toggle-focus {
+    box-shadow: none;
+  }

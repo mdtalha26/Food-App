@@ -23,6 +23,7 @@ export class UpdateFoodItemComponent implements OnInit {
     foodItemId:null,
     foodItemName:"",
     foodItemDescription:"",
+    foodItemCategory:"",
     foodItemPrice:null,
     foodItemImages:[]
   }

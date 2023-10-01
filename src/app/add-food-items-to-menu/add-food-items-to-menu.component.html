@@ -18,6 +18,16 @@
                             name="foodItemDescription" required>
                             <mat-error *ngIf="foodItemForm?.controls['foodItemDescription']?.hasError('required')">Food Item Description is Required.</mat-error>
                     </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>FoodItem Category</mat-label>
+                        <select matNativeControl name="foodItemCategory" [(ngModel)]="foodItem.foodItemCategory" required>
+                          <option value="veg">Veg</option>
+                          <option value="nonveg">Non-Veg</option>
+                        </select>
+                        <mat-error *ngIf="foodItemForm?.controls['foodItemCategory']?.hasError('required')">Food Item Category is Required.</mat-error>
+                      </mat-form-field>
+
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>FoodItem Price</mat-label>
                         <input matInput placeholder="FoodItem Price" [(ngModel)]="foodItem.foodItemPrice"
@@ -38,10 +48,10 @@
                 <div>
                     <div class="dropzone" appDrag (files)="fileDropped($event)">
                         <div class="text-wrapper">
-                            <div class="centered">
+                            <div class="centered p-5">
                                 Drag and drop Food Item Images or
                                 <a (click)="selectFile.click()" class="browse_button">Browse</a>
-                                a file
+                                Images
                             </div>
 
                         </div>

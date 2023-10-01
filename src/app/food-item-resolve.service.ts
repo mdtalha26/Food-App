@@ -38,6 +38,7 @@ export class FoodItemResolveService implements Resolve<FoodItem> {
       foodItemId:null,
       foodItemName:"",
       foodItemDescription:"",
+      foodItemCategory:"",
       foodItemPrice:null,
       foodItemImages:[]
     };

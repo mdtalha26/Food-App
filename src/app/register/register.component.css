@@ -1,7 +1,10 @@
 .container{
-    max-width: 50%;
+    max-width: 30%;
 }
 h2{
     text-align: center;
     color: #393E46;
+}
+.card{
+    border-radius: 10px;
 }

@@ -11,6 +11,7 @@
                        id="userName"
                        placeholder="Username"
                        (focus)="markControlAsTouched('userName')">
+                       <mat-error *ngIf="registerForm.get('userName').hasError('pattern')">Username must be all lowercase.</mat-error>
                        <mat-error *ngIf="registerForm.get('userName').hasError('required')">Username is required.</mat-error>
                 <!-- <mat-hint>Username</mat-hint> -->
             </mat-form-field>

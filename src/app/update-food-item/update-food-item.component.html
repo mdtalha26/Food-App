@@ -18,6 +18,16 @@
                             name="foodItemDescription" required>
                             <mat-error *ngIf="foodItemForm?.controls['foodItemDescription']?.hasError('required')">Food Item Description is Required.</mat-error>
                     </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>FoodItem Category</mat-label>
+                        <select matNativeControl name="foodItemCategory" [(ngModel)]="foodItem.foodItemCategory" required>
+                          <option value="veg">Veg</option>
+                          <option value="nonveg">Non-Veg</option>
+                        </select>
+                        <mat-error *ngIf="foodItemForm?.controls['foodItemCategory']?.hasError('required')">Food Item Category is Required.</mat-error>
+                      </mat-form-field>
+
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>FoodItem Price</mat-label>
                         <input matInput placeholder="FoodItem Price" [(ngModel)]="foodItem.foodItemPrice"

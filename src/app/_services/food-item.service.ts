@@ -41,8 +41,8 @@ export class FoodItemService {
     return this.httpClient.post<FoodItem>("http://localhost:9090/addNewFoodItem",foodItem);
   }
 
-  public getAllFoodItems(pageNumber, searchKeyword: string = "") {
-    return this.httpClient.get<FoodItem[]>("http://localhost:9090/getAllFoodItems?pageNumber="+pageNumber+"&searchKey="+searchKeyword);
+  public getAllFoodItems(pageNumber, searchKeyword: string = "", category:string="") {
+    return this.httpClient.get<FoodItem[]>("http://localhost:9090/getAllFoodItems?pageNumber="+pageNumber+"&searchKey="+searchKeyword+"&category="+category);
   }
 
   public addToCart(foodItemId) {

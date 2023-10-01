@@ -39,8 +39,14 @@ export class HomeComponent implements OnInit {
     this.getAllFoodItems(searchkeyword);
   }
 
-  public getAllFoodItems(searchKey: string = "") {
-    this.foodItemService.getAllFoodItems(this.pageNumber, searchKey)
+  searchByCategory(category) {
+    this.pageNumber = 0;
+    this.foodItemDetails = [];
+    this.getAllFoodItems(null,category);
+  }
+
+  public getAllFoodItems(searchKey: string = "",category:string="") {
+    this.foodItemService.getAllFoodItems(this.pageNumber, searchKey,category)
     .pipe(
       map((x: FoodItem[], i) => x.map((foodItem: FoodItem) => this.foodItemImgProcessingService.createImages(foodItem)))
     )
