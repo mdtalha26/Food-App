@@ -23,7 +23,7 @@ export class ViewAllRestaurantsComponent implements OnInit {
 
   restaurantDetails:Restaurant[]=[];
 
-  displayedColumns: string[] = ['Restaurant Name','Restaurant Owner', 'Restaurant Address','Documents','Delete','View Restaurant'];
+  displayedColumns: string[] = ['Restaurant Name','Restaurant Address', 'Restaurant Owner','Documents','Delete','View Restaurant'];
   constructor(private restaurantService: RestaurantService,
               private userAuthService: UserAuthService,
               public documentImagesDialog:MatDialog,
@@ -32,9 +32,9 @@ export class ViewAllRestaurantsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isUser()) {
-      const index = this.displayedColumns.indexOf('Documents');
+      const index = this.displayedColumns.indexOf('Restaurant Owner');
       if (index !== -1) {
-        this.displayedColumns.splice(index, 2);
+        this.displayedColumns.splice(index, 3);
       }
       
     }

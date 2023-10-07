@@ -2,7 +2,8 @@
     <div class="card p-2">
 
         <div class="row">
-            <div class="headding mt-5 mb-5">Add New Restaurant</div>
+            <div *ngIf="isNewRestaurant" class="headding mt-5 mb-5">Add New Restaurant</div>
+            <div *ngIf="!isNewRestaurant" class="headding mt-5 mb-5">Update Restaurant</div>
             <div class="col-6">
 
                 <form #restaurantForm="ngForm" (ngSubmit)="createRestaurant(restaurantForm)">
@@ -16,7 +17,7 @@
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>FSSAI License Number</mat-label>
                         <input matInput placeholder="FSSAI License Number" [(ngModel)]="restaurant.fssaiLicenseNumber"
-                            name="fssaiLicenseNumber" required pattern="^[0-9]{14}$">
+                            name="fssaiLicenseNumber" required pattern="^[0-9]{14}$" [disabled]="!isNewRestaurant">
                         <mat-error *ngIf="restaurantForm?.controls['fssaiLicenseNumber']?.hasError('required')">FSSAI License is Required.</mat-error>
                         <mat-error *ngIf="restaurantForm?.controls['fssaiLicenseNumber']?.hasError('pattern')">FSSAI License must consist of exactly 14 digits.</mat-error>
                     </mat-form-field>

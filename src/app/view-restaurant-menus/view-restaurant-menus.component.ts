@@ -68,6 +68,7 @@ export class ViewRestaurantMenusComponent implements OnInit {
         this.openErrorDialog('Success', 'Menu Deleted Successfully');
       },
       (error:HttpErrorResponse)=>{
+        this.openErrorDialog('Failed', 'Something went wrong');
         console.log(error);
       }
     );

@@ -44,6 +44,7 @@ export class UpdateMenuInRestaurantComponent implements OnInit {
         this.router.navigate(["/viewRestaurantMenus",{restaurantId:this.restaurantId}]);
       },
       (error:HttpErrorResponse)=>{
+        this.openErrorDialog('Failed', 'Something went wrong');
         console.log(error);
       }
     );

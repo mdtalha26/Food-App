@@ -65,6 +65,10 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  public reloadPage(){
+    location.reload();
+  }
+
   public loadMoreProduct() {
     this.pageNumber = this.pageNumber + 1;
     this.getAllFoodItems();

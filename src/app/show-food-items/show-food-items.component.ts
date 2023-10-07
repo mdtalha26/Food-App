@@ -65,7 +65,7 @@ export class ShowFoodItemsComponent implements OnInit {
     .subscribe(
       (resp:FoodItem[])=>{
         console.log(resp);
-        if(resp.length == 4) {
+        if(resp.length == 10) {
           this.showLoadButton = true;
         } else {
           this.showLoadButton = false;
@@ -97,6 +97,7 @@ export class ShowFoodItemsComponent implements OnInit {
     this.foodItemService.deleteFoodItem(foodItemId).subscribe(
       (resp)=>{
         this.flag=false;
+        this.foodItemDetails=[];
         this.getFoodItems();
         this.openErrorDialog('Success', 'FoodItem Deleted Successfully');
       },

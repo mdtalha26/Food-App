@@ -19,15 +19,15 @@
       <td mat-cell *matCellDef="let element"> {{element.restaurantName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Restaurant Owner">
-      <th mat-header-cell *matHeaderCellDef> Restaurant Owner </th>
-      <td mat-cell *matCellDef="let element"> {{element.user.userName}} </td>
-    </ng-container>
-  
-    <!-- Address column -->
     <ng-container matColumnDef="Restaurant Address">
       <th mat-header-cell *matHeaderCellDef> Restaurant Address </th>
       <td mat-cell *matCellDef="let element"> {{element.restaurantAddress}} </td>
+    </ng-container>
+  
+    <!-- Address column -->
+    <ng-container matColumnDef="Restaurant Owner">
+      <th mat-header-cell *matHeaderCellDef> Restaurant Owner </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.userName}} </td>
     </ng-container>
 
     <!-- Image Column -->

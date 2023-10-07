@@ -1,0 +1,36 @@
+.card{
+    padding: 20px; 
+    color: black;
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    display: flex;
+}
+
+.fields{
+    flex: 1;
+}
+
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .static-info {
+    width: 120px; /* Adjust the width as needed */
+  }
+  
+  .form-fields {
+    flex: 1; /* Grow to take available space */
+  }
+
+  .container{
+    max-width: 350px;
+  }

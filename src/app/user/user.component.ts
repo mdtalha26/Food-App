@@ -8,7 +8,12 @@ import { UserService } from '../_services/user.service';
 })
 export class UserComponent implements OnInit {
 
-  message;
+  userName:"";
+  emailId:"";
+  phoneNumber:"";
+  name;
+
+  isEditing: boolean = false;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -18,9 +23,13 @@ export class UserComponent implements OnInit {
   forUser() {
     this.userService.forUser().subscribe(
       (response:any) => {
+        console.log(response);
+        this.userName=response.userName;
         const frstName=response.userFirstName;
         const lstName=response.userLastName;
-        this.message=frstName+" "+lstName; 
+        this.name=frstName+" "+lstName; 
+        this.emailId=response.emailId;
+        this.phoneNumber=response.phoneNumber;
       }, 
       (error)=>{
         console.log(error);

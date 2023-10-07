@@ -5,12 +5,21 @@ mat-grid-tile {
 
 .image-container {
     position: relative;
-    height: 300px;
+    height: 136px;
+    overflow: hidden;
+}
+.text-container {
+  position: relative;
+  height: 136px;
+}
+
+.price{
+  min-height: 40px;
 }
 
 .home-page-product-image {
-    max-width: 90%;
-    max-height: 90%;
+    min-width: 272px;
+    max-height: 272px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -45,3 +54,12 @@ mat-grid-tile {
 .toggle-button.mat-button-toggle-focus {
     box-shadow: none;
   }
+
+.clear{
+  color: gray;
+}
+
+.row{
+  max-width: 272px;
+  max-height: 272px;
+}

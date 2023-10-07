@@ -8,8 +8,13 @@ import { UserService } from '../_services/user.service';
 })
 export class RestaurantComponent implements OnInit {
 
+  userName:"";
+  emailId:"";
+  phoneNumber:"";
+  name;
 
-  message;
+  isEditing: boolean = false;
+  
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {
@@ -20,11 +25,12 @@ export class RestaurantComponent implements OnInit {
   forRestaurant(){
     this.userService.forRestaurant().subscribe(
       (response:any)=>{
+        this.userName=response.userName;
         const frstName=response.userFirstName;
         const lstName=response.userLastName;
-        this.message=frstName+" "+lstName;
-        // console.log(Response);
-        // this.message=Response
+        this.name=frstName+" "+lstName; 
+        this.emailId=response.emailId;
+        this.phoneNumber=response.phoneNumber;
       },
       (error)=>{
         console.log(error);
