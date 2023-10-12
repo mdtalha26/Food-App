@@ -1,50 +1,55 @@
-<div class="container mt-5">
-    <div class="card">
-        <h1 class="text-center">Profile</h1>
-        <div class="profile">
-            <!-- Username section -->
-            <div class="profile-section">
+<div class="container">
+  <div class="image-container">
+    <img src="assets/Images/Profile.jpg" alt="Google Image">
+
+    <div class="card overlay-text">
+      <h1 class="text-center">Profile</h1>
+      <div class="profile">
+          <!-- Username section -->
+          <div class="profile-section">
+            <div class="static-info">
+              <strong>Username:</strong>
+            </div>
+            <div class="form-fields">
+              <input type="text" [(ngModel)]="userName" [disabled]="!isEditing"/>
+            </div>
+          </div>
+      
+          <!-- Name section -->
+          <div class="profile-section">
               <div class="static-info">
-                <strong>Username:</strong>
+                <strong>Name:</strong>
               </div>
               <div class="form-fields">
-                <input type="text" [(ngModel)]="userName" [disabled]="!isEditing"/>
+                <input type="text" [(ngModel)]="name" [disabled]="!isEditing"/>
               </div>
             </div>
         
-            <!-- Name section -->
-            <div class="profile-section">
-                <div class="static-info">
-                  <strong>Name:</strong>
-                </div>
-                <div class="form-fields">
-                  <input type="text" [(ngModel)]="name" [disabled]="!isEditing"/>
-                </div>
-              </div>
-          
-            <!-- Email section -->
-            <div class="profile-section">
-              <div class="static-info">
-                <strong>Email:</strong>
-              </div>
-              <div class="form-fields">
-                <input type="text" [(ngModel)]="emailId" [disabled]="!isEditing"/>
-              </div>
+          <!-- Email section -->
+          <div class="profile-section">
+            <div class="static-info">
+              <strong>Email:</strong>
             </div>
-          
-            <!-- Phone Number section -->
-            <div class="profile-section">
-              <div class="static-info">
-                <strong>Phone Number:</strong>
-              </div>
-              <div class="form-fields">
-                <input type="text" [(ngModel)]="phoneNumber" [disabled]="!isEditing"/>
-              </div>
+            <div class="form-fields">
+              <input type="text" [(ngModel)]="emailId" [disabled]="!isEditing"/>
             </div>
           </div>
         
-        
-    </div>
+          <!-- Phone Number section -->
+          <div class="profile-section">
+            <div class="static-info">
+              <strong>Phone Number:</strong>
+            </div>
+            <div class="form-fields">
+              <input type="text" [(ngModel)]="phoneNumber" [disabled]="!isEditing"/>
+            </div>
+          </div>
+        </div>
+      
+      
+  </div>
+  </div>
+    
 </div>
 
   

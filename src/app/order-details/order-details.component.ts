@@ -13,11 +13,12 @@ export class OrderDetailsComponent implements OnInit {
   pageNumber: number = 0;
 
   showLoadButton = false;
-
-  displayedColumns: string[] = ['FoodItem Name', 'Name', 'Address', 'Contact No.','Date and Time', 'Status', 'Action'];
+  actualColumns: string[] = ['Order Id','FoodItem Name', 'Name', 'Address', 'Contact No.','Date and Time','Amount', 'Status', 'Action'];
+  displayedColumns: string[] = ['Order Id','FoodItem Name', 'Name', 'Address', 'Contact No.','Date and Time', 'Status', 'Action'];
   dataSource = [];
   flag:Boolean=false;
   sortDirection: string = 'Asc';
+  statusParam:string;
 
   status: string = 'All';
   isRestaurantFlag:boolean =false;
@@ -40,14 +41,16 @@ export class OrderDetailsComponent implements OnInit {
 
   getAllOrderDetailsForAdmin(statusParameter: string,searchKey: string = "") {
     if(this.isRestaurantFlag==false){
-      console.log("this is admin 1");
+      this.hideAction(statusParameter);
+      this.statusParam=statusParameter;
+      console.log("status param is "+this.statusParam);
     this.foodItemService.getAllOrderDetailsForAdmin(statusParameter,this.sortDirection,this.pageNumber,searchKey).subscribe(
       (resp) => {
         if(resp.length>0){
           this.flag=true;
         }
         console.log("this is admin 2");
-        this.dataSource = resp;
+        this.dataSource = this.dataSource.concat(resp);
         console.log(resp);
         if(resp.length == 12) {
           this.showLoadButton = true;
@@ -60,6 +63,8 @@ export class OrderDetailsComponent implements OnInit {
     );
     }else if(this.isRestaurantFlag==true){
       console.log("Toggle is "+this.sortDirection);
+      this.hideAction(statusParameter);
+      this.statusParam=statusParameter;
 
       this.foodItemService.getRestaurantOrders(statusParameter,this.sortDirection,this.pageNumber,searchKey).subscribe(
         (resp) => {
@@ -85,12 +90,24 @@ export class OrderDetailsComponent implements OnInit {
     console.log(orderId);
     this.foodItemService.markAsDelivered(orderId).subscribe(
       (response) => {
-        this.getAllOrderDetailsForAdmin(this.status,this.sortDirection);
+        this.getAllOrderDetailsForAdmin(this.statusParam);
         console.log(response);
       }, (error) => {
         console.log(error);
       }
     );
+  }
+
+  hideAction(statusParameter){
+    this.displayedColumns=this.actualColumns.slice();
+    if(statusParameter==='Delivered'){
+      const index = this.displayedColumns.indexOf('Action');
+      if (index !== -1) {
+        this.displayedColumns.splice(index, 1);
+      }
+    }else{
+      null;
+    }
   }
 
   
@@ -110,6 +127,13 @@ export class OrderDetailsComponent implements OnInit {
 
   toggleSort() {
     this.sortDirection = this.sortDirection === 'Asc' ? 'Desc' : 'Asc';
+  }
+
+  public getAllOrdersByStatus(statusParameter: string){
+    this.dataSource=[];
+    this.pageNumber=0;
+    this.status=statusParameter;
+    this.getAllOrderDetailsForAdmin(statusParameter);
   }
 
   public loadMoreProduct() {

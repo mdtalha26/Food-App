@@ -14,9 +14,13 @@ export class RestaurantService {
     return this.httpClient.post<Restaurant>(environment.apiUrl+"/restaurants",restaurant);
   }
 
-  // public getAllRestaurants(){
-  //   return this.httpClient.get<Restaurant[]>("http://localhost:9090/restaurants");
-  // }
+  public verifyRestaurant(restaurantId:any){
+    return this.httpClient.get<Restaurant>(environment.apiUrl+"/restaurants/verifyRestaurant/"+restaurantId);
+  }
+
+  public getAllRestaurantsForAdmin(pageNumber, searchKeyword: string = ""){
+    return this.httpClient.get<Restaurant[]>(environment.apiUrl+"/restaurants/forAdmin?pageNumber="+pageNumber+"&searchKey="+searchKeyword);
+  }
 
   public getAllRestaurantsPage(pageNumber, searchKeyword: string = "") {
     return this.httpClient.get<Restaurant[]>(environment.apiUrl+"/restaurants?pageNumber="+pageNumber+"&searchKey="+searchKeyword);

@@ -1,9 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 60%;}
+html, body { height: 90%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: bisque; }
+
+h1, h2, h3 {
+    font-family: 'Roboto', sans-serif;
+  }
+
 .mat-typography{
-    background-color: #EEEEEE;
+    
 }
 .mat-flat-button{
     background-color: #00ADB5;

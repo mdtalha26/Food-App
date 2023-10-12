@@ -37,11 +37,13 @@ export class UserService {
     return this.httpclient.get(this.PATH_OF_API + '/forUser');
   }
 
+  public updateDetails(userDetails){
+    return this.httpclient.post(this.PATH_OF_API+'/updateDetails',userDetails);
+  }
+
 
   public forAdmin() {
-    return this.httpclient.get(this.PATH_OF_API + '/forAdmin', {
-      responseType: 'text',
-    });
+    return this.httpclient.get(this.PATH_OF_API + '/forAdmin');
   }
 
   public forRestaurant(){

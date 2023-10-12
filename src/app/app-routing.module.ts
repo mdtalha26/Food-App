@@ -97,7 +97,7 @@ const routes: Routes = [
   {
     path: "viewFoodItemDetails",
     component: ViewFoodItemDetailsComponent,
-    resolve: { foodItem:FoodItemResolveService},
+    resolve: { foodItem:FoodItemResolveService,restaurant:RestaurantResolveService},
   },
   {
     path: "buyProduct",
@@ -142,7 +142,7 @@ const routes: Routes = [
     path:"addMenuToRestaurant", component:AddMenuToRestaurantComponent
   },
   {
-    path:"viewRestaurantMenus",component:ViewRestaurantMenusComponent
+    path:"viewRestaurantMenus",component:ViewRestaurantMenusComponent, resolve:{restaurant: RestaurantResolveService}
   },
   { path: 'viewRestaurantMenus/:restaurantId', component: ViewRestaurantMenusComponent },
   {

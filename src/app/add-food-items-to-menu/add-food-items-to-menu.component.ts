@@ -20,6 +20,7 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 export class AddFoodItemsToMenuComponent implements OnInit {
   isNewFoodItem=true;
 
+  restaurantId=null;
   menuId=null;
   foodItem: FoodItem={
     foodItemId:null,
@@ -42,6 +43,7 @@ export class AddFoodItemsToMenuComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
       this.menuId=params['menuId'];
+      this.restaurantId=params['restaurantId'];
     })
     // this.foodItem=this.activatedRoute.snapshot.data['foodItem']
     if(this.foodItem && this.foodItem.foodItemId){
@@ -57,11 +59,12 @@ export class AddFoodItemsToMenuComponent implements OnInit {
 
     this.foodItemService.addFoodItemsToMenu(menuId,foodItemFormData).subscribe(
       (reponse:FoodItem)=>{
+        console.log("Restaurant id is "+ this.restaurantId);
         foodItemForm.reset();
         
         this.foodItem.foodItemImages=[];
         this.openErrorDialog('Success', 'Added FoodItem Successfully');
-        this.router.navigate(['/showFoodItems/',{menuId}]);
+        this.router.navigate(["/viewRestaurantMenus",{restaurantId:this.restaurantId}]);
       },
       (error:HttpErrorResponse)=>{
         this.openErrorDialog('Error', 'Something went wrong. Please check if you have uploaded Image and Try again');

@@ -12,9 +12,7 @@
                         <input matInput
                                placeholder="Full name"
                                [(ngModel)]="orderDetails.fullName"
-                               name="fullName" required
-                               pattern="\s*\S+\s*">
-                               <mat-error *ngIf="orderForm?.controls['fullName']?.hasError('pattern')">Invalid Name.</mat-error>
+                               name="fullName" required>
                                <mat-error *ngIf="orderForm?.controls['fullName']?.hasError('required')">Full Name is Required.</mat-error>
                     </mat-form-field>
 
@@ -24,9 +22,7 @@
                         <input matInput
                                placeholder="Full address"
                                [(ngModel)]="orderDetails.fullAddress"
-                               name="fullAddress" required
-                               pattern="\s*\S+\s*">
-                               <mat-error *ngIf="orderForm?.controls['fullAddress']?.hasError('pattern')">Invalid Address.</mat-error>
+                               name="fullAddress" required>
                                <mat-error *ngIf="orderForm?.controls['fullAddress']?.hasError('required')">Full Address is Required.</mat-error>
                     </mat-form-field>
 
@@ -52,7 +48,8 @@
                     </mat-form-field>
 
                     <div align="right">
-                        <button type="submit" mat-stroked-button [disabled]="orderForm?.invalid">Place Order</button>
+                        <button type="button" mat-button  (click)="orderForm.reset();">Clear</button>
+                        <button type="submit" mat-flat-button color="accent" [disabled]="orderForm?.invalid">Place Order</button>
                     </div>
                 </form>
 

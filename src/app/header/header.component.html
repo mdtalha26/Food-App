@@ -4,6 +4,10 @@
   </span>
 
   <span class="space-buttons"></span>
+  <button (click)="onClickSendEmail()" mat-button color="accent">Help</button>
+  <button *ngIf="isLoggedIn()&&isRestaurant()" mat-button color="accent" routerLink="/restaurant"><i class="fa-solid fa-user fa-xl"></i></button>
+  <button *ngIf="isLoggedIn()&&isUser()" mat-button color="accent" routerLink="/user"><i class="fa-solid fa-user fa-xl"></i></button>
+  <button *ngIf="isLoggedIn()&&isAdmin()" mat-button color="accent" routerLink="/admin"><i class="fa-solid fa-user fa-xl"></i></button>
   <button *ngIf="! isLoggedIn()" routerLink="/login" mat-flat-button color="accent">
     Login
   </button>
@@ -14,13 +18,13 @@
 
 <div class="button-container">
   <mat-toolbar class="loggedInToolBar" color="primary" *ngIf="isLoggedIn()">
-    <button mat-raised-button color="accent" routerLink="/">Home</button>
-    <button *ngIf="isAdmin()||isUser()" mat-flat-button color="accent" routerLink="/viewAllRestaurants">View All
+    <button *ngIf="!isRestaurant()" mat-raised-button color="accent" routerLink="/">Home</button>
+    <button *ngIf="isAdmin()" mat-flat-button color="accent" routerLink="/viewAllRestaurants">View All
       Restaurants</button>
-    <button *ngIf="isRestaurant()" mat-flat-button color="accent" routerLink="/viewMyRestaurants">View My
+    <button *ngIf="isRestaurant()" mat-raised-button color="accent" routerLink="/viewMyRestaurants">View My
       Restaurant</button>
     <div class="right-align-buttons">
-      <button *ngIf="isUser()" mat-flat-button color="accent" routerLink="/cart"><mat-icon>shopping_cart</mat-icon></button>
+      <button *ngIf="isUser()" mat-flat-button color="accent" routerLink="/cart" ><mat-icon>shopping_cart</mat-icon><span *ngIf="cartCount > 0" class="cart-count">{{ cartCount }}</span></button>
       <button *ngIf="isUser()" mat-flat-button color="accent" routerLink="/myOrders">My Orders</button>
       <!-- <button *ngIf="isAdmin()" mat-flat-button color="accent" routerLink="/addNewProduct">Add New Product</button>
            <button *ngIf="isAdmin()" mat-flat-button color="accent" routerLink="/showProductDetails">Show Product Details</button> -->

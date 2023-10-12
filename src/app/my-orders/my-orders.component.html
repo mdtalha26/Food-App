@@ -1,7 +1,25 @@
-<div class="container mt-5">
+<div class="container mt-5" style=" margin-bottom: 50px;">
+    <mat-form-field appearance="fill" class="w-25">
+        <mat-label>Search Order by User</mat-label>
+        <input matInput
+               #searchkeyword
+               (keyup)="searchByKeyword(searchkeyword.value)"
+               name="searchKey"
+               id="searchKey"
+               placeholder="Search Order">
+               <mat-icon matSuffix>search</mat-icon>
+        <mat-hint>Search order by user</mat-hint>
+      </mat-form-field><br>
     <table mat-table
            [dataSource]="myOrderDetails"
            class="mt-5">
+
+        <ng-container matColumnDef="Order Id">
+            <th mat-header-cell
+                *matHeaderCellDef><b> Order Id</b> </th>
+            <td mat-cell
+                *matCellDef="let element"> {{element.orderId}} </td>
+        </ng-container>
 
         <ng-container matColumnDef="Name">
             <th mat-header-cell
@@ -21,7 +39,7 @@
             <th mat-header-cell
                 *matHeaderCellDef><b> FoodItem</b> </th>
             <td mat-cell
-                *matCellDef="let element"> {{element.foodItem.foodItemDescription}} </td>
+                *matCellDef="let element"> {{element.foodItem.foodItemName}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Contact No.">
@@ -51,4 +69,8 @@
         <tr mat-row
             *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <div class="text-center mt-5" style="padding-bottom: 100px;" *ngIf="showLoadButton">
+        <button type="button" mat-raised-button color="accent" (click)="loadMoreProduct()"> Load more</button>
+      </div>
 </div>

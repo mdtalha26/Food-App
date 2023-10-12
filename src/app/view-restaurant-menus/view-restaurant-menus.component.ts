@@ -6,6 +6,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UserAuthService } from '../_services/user-auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { RestaurantService } from '../_services/restaurant.service';
+import { Restaurant } from '../_model/restaurant.model';
 
 @Component({
   selector: 'app-view-restaurant-menus',
@@ -15,17 +17,24 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 export class ViewRestaurantMenusComponent implements OnInit {
 
   restaurantId:number;
+  restaurant:Restaurant;
+  menuId:number;
+  restaurantName:String;
+  restaurantAddress:String;
   flag:Boolean=false;
   menuDetails:Menu[]=[];
-  displayedColumns: string[] = ['Menu Name', 'Description','Edit','Delete','View FoodItems'];
+  displayedColumns: string[] = ['Menu Name','Edit','Delete'];
 
   constructor(private menuService:MenuService,
+              private restaurantService:RestaurantService,
               private userAuthService: UserAuthService,
               private route:ActivatedRoute,
               private router:Router,
               public dialog:MatDialog) { }
 
   ngOnInit(): void {
+    this.restaurant = this.route.snapshot.data['restaurant'];
+    console.log(this.restaurant);
     this.route.params.subscribe(params=>{
       this.restaurantId=params['restaurantId'];
     })
@@ -39,6 +48,7 @@ export class ViewRestaurantMenusComponent implements OnInit {
     
     this.getRestaurantMenus();
     this.isMenuPresent();
+    this.getRestaurantDetails();
   }
 
   public getRestaurantMenus(){
@@ -46,11 +56,22 @@ export class ViewRestaurantMenusComponent implements OnInit {
       (resp:Menu[])=>{
         console.log(resp);
         this.menuDetails=resp;
+        this.menuId=resp[0].menuId;
         if(resp.length>0){
           this.flag=true;
           }
       },(error:HttpErrorResponse)=>{
         console.log(error);
+      }
+    )
+  }
+
+  public getRestaurantDetails(){
+    this.restaurantService.getRestaurantById(this.restaurantId).subscribe(
+      (resp:Restaurant)=>{
+        this.restaurantName=resp.restaurantName;
+        this.restaurantAddress=resp.restaurantAddress;
+        console.log(this.restaurantName);
       }
     )
   }
@@ -82,12 +103,17 @@ export class ViewRestaurantMenusComponent implements OnInit {
     this.router.navigate(['/updateMenuInRestaurant/',{restaurantId,menuId}]);
   }
   viewFoodItems(menuId){
+    this.menuId=menuId;
     console.log(menuId);
-    this.router.navigate(['/showFoodItems/',{menuId}]);
+    // this.router.navigate(['/showFoodItems/',{menuId}]);
   }
 
   public isUser() {
     return this.userAuthService.isUser();
+  }
+
+  public isRestaurant(){
+    return this.userAuthService.isRestaurant();
   }
 
   public isMenuPresent(){
@@ -102,5 +128,14 @@ export class ViewRestaurantMenusComponent implements OnInit {
       },
     });
   }
+
+  onBack(){
+    if(this.isRestaurant()){
+    this.router.navigate(['/viewMyRestaurants']);
+    }else{
+      this.router.navigate(['']);
+    }
+  }
+
 
 }

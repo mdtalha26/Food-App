@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MenuService } from '../_services/menu.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Menu } from '../_model/menu.model';
@@ -17,16 +17,16 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
   templateUrl: './show-food-items.component.html',
   styleUrls: ['./show-food-items.component.css']
 })
-export class ShowFoodItemsComponent implements OnInit {
+export class ShowFoodItemsComponent implements OnChanges {
 
   pageNumber: number = 0;
-
   showLoadButton = false;
 
-  menuId:number;
+  @Input() menuId:number;
+  @Input() restaurantId:number;
   flag:Boolean=false;
   foodItemDetails:FoodItem[]=[];
-  displayedColumns: string[] = ['FoodItem Name', 'Description','Price','Images','Edit','Delete','View'];
+  displayedColumns: string[] = ['FoodItem Name', 'Description','Price','Edit','Delete','View'];
 
   constructor(private foodItemService:FoodItemService,
               private userAuthService: UserAuthService,
@@ -36,10 +36,13 @@ export class ShowFoodItemsComponent implements OnInit {
               public dialog:MatDialog,
               private router:Router) { }
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params=>{
-      this.menuId=params['menuId'];
-    })
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.menuId && this.menuId){
+      this.foodItemDetails=[];
+      this.pageNumber=0;
+    // this.route.params.subscribe(params=>{
+    //   this.menuId=params['menuId'];
+    // })
     if (this.isUser()) {
       const index = this.displayedColumns.indexOf('Edit');
       if (index !== -1) {
@@ -48,6 +51,7 @@ export class ShowFoodItemsComponent implements OnInit {
       
     }
     this.getFoodItems();
+  }
   }
 
   searchByKeyword(searchkeyword) {
@@ -90,7 +94,7 @@ export class ShowFoodItemsComponent implements OnInit {
   public addFoodItem(menuId){
     const id=this.menuId;
     console.log(id);
-    this.router.navigate(["/addFoodItemsToMenu",{menuId:id}]);
+    this.router.navigate(["/addFoodItemsToMenu",{menuId:id,restaurantId:this.restaurantId}]);
   }
 
   deleteFoodItem(foodItemId){
@@ -133,7 +137,7 @@ export class ShowFoodItemsComponent implements OnInit {
   }
 
   showFoodItemDetails(foodItemId) {
-    this.router.navigate(['/viewFoodItemDetails', {foodItemId: foodItemId}]);
+    this.router.navigate(['/viewFoodItemDetails', {foodItemId: foodItemId,restaurantId:this.restaurantId}]);
   }
 
   public isFoodItemPresent(){

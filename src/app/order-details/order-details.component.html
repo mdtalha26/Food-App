@@ -13,14 +13,18 @@
   </mat-form-field><br>
 
   <mat-button-toggle-group  aria-label="Font Style" class="mt-3">
-    <mat-button-toggle value="All" (click)="toggleSort()" (click)="getAllOrderDetailsForAdmin('All')">All<mat-icon>swap_vert</mat-icon></mat-button-toggle>
-    <mat-button-toggle value="Placed" (click)="toggleSort()" (click)="getAllOrderDetailsForAdmin('Placed')">Placed<mat-icon>swap_vert</mat-icon></mat-button-toggle>
-    <mat-button-toggle value="Delivered" (click)="toggleSort()" (click)="getAllOrderDetailsForAdmin('Delivered')" >Delivered<mat-icon>swap_vert</mat-icon></mat-button-toggle>
+    <mat-button-toggle value="All" (click)="toggleSort()" (click)="getAllOrdersByStatus('All')">All<mat-icon>swap_vert</mat-icon></mat-button-toggle>
+    <mat-button-toggle value="Placed" (click)="toggleSort()" (click)="getAllOrdersByStatus('Placed')">Placed<mat-icon>swap_vert</mat-icon></mat-button-toggle>
+    <mat-button-toggle value="Delivered" (click)="toggleSort()" (click)="getAllOrdersByStatus('Delivered')" >Delivered<mat-icon>swap_vert</mat-icon></mat-button-toggle>
   </mat-button-toggle-group>
 
 <table mat-table [dataSource]="dataSource" class="mt-3">
 
-  
+    <ng-container matColumnDef="Order Id">
+      <th mat-header-cell *matHeaderCellDef> Order Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+    </ng-container>
+
     <!-- Product Name Column -->
     <ng-container matColumnDef="FoodItem Name">
       <th mat-header-cell *matHeaderCellDef> FoodItem Name </th>
@@ -50,6 +54,11 @@
         <td mat-cell *matCellDef="let element"> {{element.orderCreatedAt}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="Amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderAmount}} </td>
+      </ng-container>
+
        <!-- orderStatus Column -->
      <ng-container matColumnDef="Status">
         <th mat-header-cell *matHeaderCellDef> Status </th>
@@ -59,7 +68,7 @@
 
        <!-- Action Column -->
      <ng-container matColumnDef="Action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element"> 
           <button *ngIf="element.orderStatus == 'Placed'" mat-flat-button color="accent" (click)="markAsDelivered(element.orderId)">Mark as Delivered</button>  
       </td>

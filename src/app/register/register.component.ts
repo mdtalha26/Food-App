@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
       userLastName: ['', Validators.required], // Add required validator
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], // Example: 10-digit phone number
       emailId: ['', [Validators.required, Validators.email]], // Add required and email validators
+      userAddress:['',(this.id===undefined) ? [Validators.required] : []],
       userPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^[^\s]+$/)]] // Add required and minimum length validators
     },{ updateOn: 'change' });
     // Object.values(this.registerForm.controls).forEach(control => {
@@ -68,6 +69,8 @@ export class RegisterComponent implements OnInit {
     } else {
       console.log(this.id);
       console.log("this is working");
+      this.registerForm.get('userAddress').setValidators([Validators.required]);
+      this.registerForm.get('userAddress').updateValueAndValidity();
       this.userService.register(this.registerForm.value).subscribe(
         (response) => {
           console.log(response);

@@ -1,5 +1,53 @@
-<div class="container mt-5">
-    <div class="card text-center" style="color: green; padding: 20px;">
-        <h1>Logged In as Admin</h1>
+<div class="container">
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Google Image">
+  
+      <div class="card overlay-text">
+        <h1 class="text-center">Profile</h1>
+        <div class="profile">
+            <!-- Username section -->
+            <div class="profile-section">
+              <div class="static-info">
+                <strong>Username:</strong>
+              </div>
+              <div class="form-fields">
+                <input type="text" [(ngModel)]="userName" [disabled]="!isEditing"/>
+              </div>
+            </div>
+        
+            <!-- Name section -->
+            <div class="profile-section">
+                <div class="static-info">
+                  <strong>Name:</strong>
+                </div>
+                <div class="form-fields">
+                  <input type="text" [(ngModel)]="name" [disabled]="!isEditing"/>
+                </div>
+              </div>
+          
+            <!-- Email section -->
+            <div class="profile-section">
+              <div class="static-info">
+                <strong>Email:</strong>
+              </div>
+              <div class="form-fields">
+                <input type="text" [(ngModel)]="emailId" [disabled]="!isEditing"/>
+              </div>
+            </div>
+          
+            <!-- Phone Number section -->
+            <div class="profile-section">
+              <div class="static-info">
+                <strong>Phone Number:</strong>
+              </div>
+              <div class="form-fields">
+                <input type="text" [(ngModel)]="phoneNumber" [disabled]="!isEditing"/>
+              </div>
+            </div>
+          </div>
+        
+        
     </div>
-</div>
+    </div>
+      
+  </div>

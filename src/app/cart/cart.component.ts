@@ -31,6 +31,7 @@ export class CartComponent implements OnInit {
       (resp) => {
         console.log(resp);
         this.flag=false;
+        this.foodItemService.getCartCount();
         this.openErrorDialog('Success', 'Cart Item deleted Successfully');
         this.getCartDetails();
       }, (err) => {

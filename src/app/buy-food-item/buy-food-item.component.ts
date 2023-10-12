@@ -7,6 +7,7 @@ import { FoodItemService } from '../_services/food-item.service';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { UserService } from '../_services/user.service';
 
 declare var Razorpay: any;
 @Component({
@@ -16,6 +17,7 @@ declare var Razorpay: any;
 })
 export class BuyFoodItemComponent implements OnInit {
 
+  isDisabled: boolean = true;
   isSingleProductCheckout: string = '';
   foodItemDetails: FoodItem[] = [] ;
 
@@ -30,6 +32,7 @@ export class BuyFoodItemComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private foodItemService: FoodItemService,
+    private userService:UserService,
     private router: Router,
     private injector: Injector,
     public dialog:MatDialog) { }
@@ -43,6 +46,8 @@ export class BuyFoodItemComponent implements OnInit {
         {foodItemId: x.foodItemId, quantity: 1}
       )
     );
+
+    this.getUserDetails();
 
     console.log(this.foodItemDetails)
     console.log(this.orderDetails);
@@ -65,6 +70,22 @@ export class BuyFoodItemComponent implements OnInit {
       (err) => {
         this.openErrorDialog('Error', 'Order Failed');
         console.log(err);
+      }
+    );
+  }
+
+  getUserDetails(){
+    this.userService.forUser().subscribe(
+      (response:any) => {
+        console.log(response);
+        const frstName=response.userFirstName;
+        const lstName=response.userLastName;
+        this.orderDetails.fullName=frstName+" "+lstName; 
+        this.orderDetails.contactNumber=response.phoneNumber;
+        this.orderDetails.fullAddress=response.userAddress;
+      }, 
+      (error)=>{
+        console.log(error);
       }
     );
   }

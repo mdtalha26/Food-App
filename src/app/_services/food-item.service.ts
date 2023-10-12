@@ -3,14 +3,18 @@ import { Injectable } from '@angular/core';
 import { FoodItem } from '../_model/fooditem.model';
 import { Menu } from '../_model/menu.model';
 import { OrderDetails } from '../_model/order-details.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MyOrderDetails } from '../_model/order.model';
 import { environment } from 'src/environments/environment';
+import { Restaurant } from '../_model/restaurant.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodItemService {
+
+  private cartCountSubject = new BehaviorSubject<number>(0);
+  cartCount$ = this.cartCountSubject.asObservable();
 
   constructor(private httpClient:HttpClient) { }
 
@@ -46,6 +50,15 @@ export class FoodItemService {
     return this.httpClient.get<FoodItem[]>(environment.apiUrl+"/getAllFoodItems?pageNumber="+pageNumber+"&searchKey="+searchKeyword+"&category="+category);
   }
 
+  ///////////////////////////////////////////////////////////////////////////////
+
+  public getAllRestForDish(pageNumber, searchKeyword: string = "", category:string="") {
+    return this.httpClient.get<Restaurant[]>(environment.apiUrl+"/getAllRestaurantsByFoodItemSearch?pageNumber="+pageNumber+"&searchKey="+searchKeyword+"&category="+category);
+  }
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+
   public addToCart(foodItemId) {
     return this.httpClient.get(environment.apiUrl+"/addToCart/"+foodItemId);
   }
@@ -66,12 +79,19 @@ export class FoodItemService {
     return this.httpClient.get(environment.apiUrl+"/getCartDetails");
   }
 
+  public getCartCount() {
+    return this.httpClient.get(environment.apiUrl+"/getCartDetails").subscribe((resp:any)=>{
+    const cartCount=resp.length;
+    this.cartCountSubject.next(cartCount);
+  });
+  }
+
   public deleteCartItem(cartId) {
     return this.httpClient.delete(environment.apiUrl+"/deleteCartItem/"+cartId);
   }
 
-  public getMyOrders(): Observable<MyOrderDetails[]> {
-    return this.httpClient.get<MyOrderDetails[]>(environment.apiUrl+"/getOrderDetails");
+  public getMyOrders(pageNumber, searchKeyword: string = ""): Observable<MyOrderDetails[]> {
+    return this.httpClient.get<MyOrderDetails[]>(environment.apiUrl+"/getOrderDetails?pageNumber="+pageNumber+"&searchKey="+searchKeyword);
   }
 
   public getRestaurantOrders(status:string,sort:String,pageNumber, searchKeyword: string = ""): Observable<MyOrderDetails[]> {

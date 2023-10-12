@@ -2,6 +2,13 @@ table{
     width: 100%;
 }
 
+.table-with-spacing th{
+    padding-right: 30px;
+  }
+.table-with-spacing td {
+  padding-right: 24px;
+}
+
 .clickzone{
     height: 150px;
     min-width: 100px;

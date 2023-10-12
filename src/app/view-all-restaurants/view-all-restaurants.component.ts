@@ -23,7 +23,7 @@ export class ViewAllRestaurantsComponent implements OnInit {
 
   restaurantDetails:Restaurant[]=[];
 
-  displayedColumns: string[] = ['Restaurant Name','Restaurant Address', 'Restaurant Owner','Documents','Delete','View Restaurant'];
+  displayedColumns: string[] = ['Restaurant Name','Restaurant Address', 'Restaurant Owner','Documents','Delete','View Restaurant','Status','Verify'];
   constructor(private restaurantService: RestaurantService,
               private userAuthService: UserAuthService,
               public documentImagesDialog:MatDialog,
@@ -50,7 +50,7 @@ export class ViewAllRestaurantsComponent implements OnInit {
 
 
   public getAllRestaurantsPage(searchKey: string = "") {
-    this.restaurantService.getAllRestaurantsPage(this.pageNumber, searchKey)
+    this.getAllRest(searchKey)
     .pipe(
       map((x: Restaurant[], i) => x.map((restaurant: Restaurant) => this.restDocImgProcessingService.createImages(restaurant)))
     )
@@ -65,6 +65,25 @@ export class ViewAllRestaurantsComponent implements OnInit {
         this.restaurantDetails=resp;
         // resp.forEach(p => this.restaurantDetails.push(p));
       }, (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    );
+  }
+
+  public getAllRest(searchKey){
+    if(this.isUser()){
+      return this.restaurantService.getAllRestaurantsPage(this.pageNumber, searchKey)
+     }else{
+       return this.restaurantService.getAllRestaurantsForAdmin(this.pageNumber,searchKey)
+     }
+  }
+
+  public verifyRest(restaurantId){
+    this.restaurantService.verifyRestaurant(restaurantId).subscribe(
+      (response) => {
+        this.getAllRestaurantsPage();
+        console.log(response);
+      }, (error) => {
         console.log(error);
       }
     );

@@ -1,5 +1,5 @@
 .card{
-    padding: 20px; 
+    padding: 10px; 
     color: black;
     border: solid 1px lightgray;
     border-radius: 10px;
@@ -24,13 +24,54 @@
   }
   
   .static-info {
-    width: 120px; /* Adjust the width as needed */
+    width: 120px; 
   }
   
   .form-fields {
-    flex: 1; /* Grow to take available space */
+    flex: 1; 
   }
 
-  .container{
+  /* .container{
     max-width: 350px;
+  } */
+
+
+  .container {
+    width: 100vw;
+    padding: 0px;
+    text-align: center; /* Center align content */
+    margin: 0px;
   }
+  
+  .image-container {
+    width: 98.7vw;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    display: inline-block; /* Make container fit the content */
+  }
+  
+  .image-container img {
+    display: block;
+    background-image: url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    width: 100%; /* Set the desired width for the image container */
+    height: 600px; /* Set the desired height for the image container */
+    position: relative;
+    overflow: hidden; /* Hide any content overflowing the container */
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .overlay-text {
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 50%; /* Position vertically in the middle of the image */
+    left: 25%; /* Position horizontally in the middle of the image */
+    transform: translate(-50%, -50%); /* Center-align the text */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background color */
+    color: white; /* Text color */
+    padding: 50px; /* Add some padding for readability */
+  }
+  

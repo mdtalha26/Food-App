@@ -10,7 +10,10 @@ import { FoodItemService } from '../_services/food-item.service';
 })
 export class MyOrdersComponent implements OnInit {
 
-  displayedColumns = ["Name", "Address","FoodItem", "Contact No.", "Amount", "Status"];
+  pageNumber: number = 0;
+  showLoadButton = false;
+
+  displayedColumns = ["Order Id","Name", "Address","FoodItem", "Contact No.", "Amount", "Status"];
 
   myOrderDetails: MyOrderDetails[] = [];
 
@@ -20,15 +23,32 @@ export class MyOrdersComponent implements OnInit {
     this.getOrderDetails();
   }
 
-  getOrderDetails() {
-    this.foodItemService.getMyOrders().subscribe(
+  searchByKeyword(searchkeyword) {
+    console.log(searchkeyword);
+    this.pageNumber = 0;
+    this.myOrderDetails = [];
+    this.getOrderDetails(searchkeyword);
+  }
+
+  getOrderDetails(searchKey: string = "") {
+    this.foodItemService.getMyOrders(this.pageNumber,searchKey).subscribe(
       (resp: MyOrderDetails[]) => {
         console.log(resp);
-        this.myOrderDetails = resp;
+        this.myOrderDetails = this.myOrderDetails.concat(resp);
+        if(resp.length == 12) {
+          this.showLoadButton = true;
+        } else {
+          this.showLoadButton = false;
+        }
       }, (err)=> {
         console.log(err);
       }
     );
+  }
+
+  public loadMoreProduct() {
+    this.pageNumber = this.pageNumber + 1;
+    this.getOrderDetails();
   }
 
 }

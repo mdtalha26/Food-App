@@ -15,6 +15,7 @@ mat-grid-tile {
 
 .price{
   min-height: 40px;
+  text-align: center;
 }
 
 .home-page-product-image {
@@ -62,4 +63,57 @@ mat-grid-tile {
 .row{
   max-width: 272px;
   max-height: 272px;
+}
+
+.card-container{
+  white-space: nowrap; /* Prevent cards from wrapping to the next line */
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 30px;
+    padding-bottom: 0;
+}
+
+.card-heading{
+  padding-top: 50px;
+  padding-left: 20px;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.card-heading-rest{
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-bottom: 30px;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+
+
+.card{
+  text-align: center;
+  border: none;
+  display: inline-block;
+  margin: 30px;
+}
+
+
+
+.circle{
+  width: 10rem; 
+  height: 10rem; 
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  justify-content: center;
+  cursor: pointer;
+}
+
+.circle img{
+  height: 100%;
+  width: 100%;
+  position: relative;
+  
 }
